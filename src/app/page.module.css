@@ -1,0 +1,687 @@
+/* 主页面样式 - 优化web端单屏显示和自适应 */
+.container {
+  min-height: 100vh;
+  min-height: 100svh; /* 移动端视口高度 */
+  padding: 1rem; /* 进一步减少padding */
+  background: linear-gradient(135deg, var(--cream-primary) 0%, var(--warm-white) 50%, var(--cream-secondary) 100%);
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* 改为center以更好利用屏幕空间 */
+}
+
+/* 头部区域 */
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem; /* 进一步减少间距 */
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+}
+
+.headerTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.historyQuickButton {
+  background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
+  border: 2px solid var(--cream-dark);
+  padding: 0.6rem 1rem;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+  position: relative;
+  overflow: hidden;
+  color: var(--cream-text);
+}
+
+.historyButtonIcon {
+  font-size: 1rem;
+}
+
+.historyButtonText {
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.historyQuickButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(232, 180, 160, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.historyQuickButton:hover::before {
+  left: 100%;
+}
+
+.historyQuickButton:hover {
+  transform: translateY(-3px) scale(1.1);
+  background: linear-gradient(135deg, var(--cream-secondary), var(--cream-accent));
+  border-color: var(--rose-gold);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+}
+
+.historyQuickButton:active {
+  transform: translateY(-1px) scale(1.05);
+}
+
+.title {
+  font-size: 2.2rem; /* 进一步优化字体大小 */
+  color: var(--cream-text);
+  margin-bottom: 0.5rem; /* 进一步减少间距 */
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem; /* 减少图标间距 */
+  text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.3);
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.subtitle {
+  font-size: 1rem; /* 进一步减少字体大小 */
+  color: var(--cream-light-text);
+  font-weight: 500;
+  margin-bottom: 1rem; /* 进一步减少间距 */
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* 法官图像 */
+.judgeIcon {
+  margin-bottom: 1rem; /* 进一步减少间距 */
+  animation: judgeFloat 4s ease-in-out infinite;
+}
+
+@keyframes judgeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); } /* 减少浮动幅度 */
+}
+
+.dogImage {
+  width: 80px; /* 进一步减少图片大小 */
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--cream-dark); /* 减少边框宽度 */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.dogImage:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.judgeName {
+  margin-top: 0.3rem; /* 进一步减少间距 */
+  font-size: 0.9rem; /* 减少字体大小 */
+  color: var(--cream-text);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* 表单容器 */
+.formContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem; /* 进一步减少间距 */
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 1.5rem; /* 进一步减少间距 */
+}
+
+.personForm {
+  background: linear-gradient(145deg, var(--warm-white) 0%, #FFFEF9 100%);
+  padding: 1.5rem; /* 进一步减少padding */
+  border-radius: 20px; /* 减少圆角 */
+  border: 2px solid var(--cream-accent); /* 减少边框宽度 */
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.personForm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(232, 180, 160, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.personForm:hover::before {
+  left: 100%;
+}
+
+.personForm:hover {
+  transform: translateY(-3px); /* 减少悬浮高度 */
+  border-color: var(--rose-gold);
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 1.2rem; /* 减少间距 */
+  position: relative;
+}
+
+.formHeader h3 {
+  font-size: 1.5rem; /* 减少字体大小 */
+  color: var(--cream-text);
+  margin: 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* 减少间距 */
+  justify-content: center;
+  text-shadow: 1px 1px 3px rgba(139, 69, 19, 0.2);
+}
+
+.formHeader::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose-gold), var(--cream-dark));
+  border-radius: 2px;
+}
+
+/* 输入组件 */
+.inputGroup {
+  margin-bottom: 1.2rem; /* 减少间距 */
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem; /* 减少间距 */
+  font-weight: 600;
+  color: var(--cream-text);
+  font-size: 1rem;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.8rem 1rem; /* 减少padding */
+  border: 2px solid var(--cream-accent);
+  border-radius: 12px; /* 减少圆角 */
+  font-size: 0.95rem; /* 减少字体大小 */
+  color: var(--cream-text);
+  background: var(--warm-white);
+  transition: all 0.3s ease;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.4; /* 减少行高 */
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--rose-gold);
+  background: #FFFEF9;
+  transform: translateY(-1px); /* 减少悬浮高度 */
+  box-shadow: 0 5px 15px rgba(232, 180, 160, 0.15); /* 减少阴影 */
+}
+
+.input::placeholder, .textarea::placeholder {
+  color: var(--cream-light-text);
+  opacity: 0.7;
+}
+
+.textarea {
+  min-height: 80px; /* 减少最小高度 */
+  max-height: 150px; /* 减少最大高度 */
+}
+
+/* 提交按钮 */
+/* 按钮区域 */
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem; /* 减少间距 */
+  background: linear-gradient(135deg, var(--rose-gold) 0%, var(--cream-dark) 100%);
+  color: var(--warm-white);
+  border: none;
+  padding: 1.2rem 2.5rem; /* 减少padding */
+  border-radius: 25px; /* 减少圆角 */
+  font-size: 1.1rem; /* 减少字体大小 */
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  min-width: 240px; /* 减少最小宽度 */
+}
+
+.historyButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, var(--cream-accent) 0%, var(--cream-secondary) 100%);
+  color: var(--cream-text);
+  border: 2px solid var(--cream-dark);
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  min-width: 200px;
+}
+
+.historyButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.historyButton:hover::before {
+  left: 100%;
+}
+
+.historyButton:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, var(--cream-secondary) 0%, var(--cream-accent) 100%);
+  border-color: var(--rose-gold);
+}
+
+.historyButton:active {
+  transform: translateY(-1px);
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.submitButton:hover::before {
+  left: 100%;
+}
+
+.submitButton:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: linear-gradient(135deg, var(--cream-dark) 0%, var(--rose-gold) 100%);
+}
+
+.submitButton:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.submitButton.disabled {
+  background: linear-gradient(135deg, #D4A574 0%, #C8A882 100%);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.submitButton.disabled:hover {
+  transform: none;
+  background: linear-gradient(135deg, #D4A574 0%, #C8A882 100%);
+}
+
+/* 大屏幕优化 - 确保单屏显示 */
+@media (min-width: 1400px) {
+  .container {
+    justify-content: center;
+    padding: 0.5rem 1rem;
+  }
+
+  .title {
+    font-size: 2.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .dogImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .formContainer {
+    max-width: 1000px;
+    gap: 2rem;
+  }
+
+  .personForm {
+    padding: 2rem;
+  }
+}
+
+/* 大屏幕布局 */
+@media (min-width: 1200px) {
+  .formContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem;
+  }
+
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* 中屏幕优化 */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .container {
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 2.4rem;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+  }
+
+  .dogImage {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* 平板端适配 */
+@media (max-width: 1024px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .dogImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .personForm {
+    padding: 2rem;
+  }
+
+  .formHeader h3 {
+    font-size: 1.6rem;
+  }
+
+  .submitButton {
+    padding: 1.3rem 2.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.8rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .judgeIcon {
+    margin-bottom: 1.5rem;
+  }
+
+  .dogImage {
+    width: 90px;
+    height: 90px;
+  }
+
+  .judgeName {
+    font-size: 1rem;
+  }
+
+  .formContainer {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .personForm {
+    padding: 1.8rem;
+    border-radius: 20px;
+  }
+
+  .formHeader {
+    margin-bottom: 1.5rem;
+  }
+
+  .formHeader h3 {
+    font-size: 1.4rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .inputGroup {
+    margin-bottom: 1.5rem;
+  }
+
+  .input, .textarea {
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+
+  .textarea {
+    min-height: 100px;
+  }
+
+  .submitButton {
+    width: 90%;
+    max-width: 300px;
+    padding: 1.2rem 2rem;
+    font-size: 1.1rem;
+    min-width: auto;
+  }
+}
+
+/* 小屏手机适配 */
+@media (max-width: 480px) {
+  .container {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .title {
+    font-size: 1.9rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .dogImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .personForm {
+    padding: 1.5rem;
+    border-radius: 18px;
+  }
+
+  .formHeader h3 {
+    font-size: 1.3rem;
+  }
+
+  .input, .textarea {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .textarea {
+    min-height: 90px;
+  }
+
+  .submitButton {
+    width: 95%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+}
+
+/* 超小屏设备 */
+@media (max-width: 360px) {
+  .container {
+    padding: 0.6rem 0.3rem;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .personForm {
+    padding: 1.2rem;
+  }
+
+  .input, .textarea {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .submitButton {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .input, .textarea {
+    font-size: 16px; /* 防止移动端缩放 */
+  }
+
+  .submitButton:hover {
+    transform: none;
+  }
+
+  .personForm:hover {
+    transform: none;
+  }
+}
+
+/* 横屏移动设备 */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container {
+    padding: 0.8rem;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+  }
+
+  .historyQuickButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .historyButtonIcon {
+    font-size: 0.9rem;
+  }
+
+  .historyButtonText {
+    font-size: 0.75rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .judgeIcon {
+    margin-bottom: 1rem;
+  }
+
+  .dogImage {
+    width: 70px;
+    height: 70px;
+  }
+
+  .formContainer {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .personForm {
+    padding: 1.5rem;
+  }
+
+  .textarea {
+    min-height: 80px;
+  }
+}

@@ -1,0 +1,899 @@
+/* 爱情指数页面样式 - 优化单屏显示 */
+.container {
+  min-height: 100vh;
+  padding: 1rem; /* 减少padding */
+  background: linear-gradient(135deg, var(--cream-primary) 0%, var(--warm-white) 50%, var(--cream-secondary) 100%);
+  background-attachment: fixed;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2rem; /* 减少字体大小 */
+  color: var(--cream-text);
+  margin-bottom: 1rem; /* 减少间距 */
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem; /* 减少间距 */
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1rem; /* 减少字体大小 */
+  color: var(--cream-light-text);
+  margin-bottom: 1.5rem; /* 减少间距 */
+  font-weight: 400;
+  line-height: 1.5; /* 减少行高 */
+}
+
+/* 爱情指数仪表盘 - 重新设计 */
+.loveIndexSection {
+  margin-bottom: 3rem; /* 减少间距 */
+  position: relative;
+}
+
+.loveometer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145deg, var(--warm-white) 0%, #FFFEF9 100%);
+  padding: 3rem 2.5rem 3rem 2.5rem; /* 重新调整padding */
+  border-radius: 35px;
+  border: 2px solid var(--cream-accent);
+  position: relative;
+  max-width: 450px; /* 增加容器宽度 */
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.loveometer::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--rose-gold), var(--cream-accent), var(--rose-gold));
+  border-radius: 42px;
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.heart {
+  margin-bottom: 1.2rem; /* 减少间距 */
+  animation: gentleHeartbeat 2.5s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes gentleHeartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.indexDisplay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  animation: numberCountUp 1.5s ease-out;
+}
+
+@keyframes numberCountUp {
+  from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.indexNumber {
+  font-size: 4rem; /* 减少字体大小 */
+  font-weight: 900;
+  color: var(--cream-text);
+  background: linear-gradient(135deg, var(--cream-text), var(--cream-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.indexUnit {
+  font-size: 1.8rem; /* 减少字体大小 */
+  color: var(--cream-light-text);
+  font-weight: 700;
+}
+
+/* 创建圆环区域容器 */
+.circleArea {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 2rem 0;
+}
+
+.progressRing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.progressSvg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progressBackground {
+  fill: none;
+  stroke: var(--cream-accent);
+  stroke-width: 12;
+  opacity: 0.3;
+}
+
+.progressBar {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loveStatus {
+  margin-top: 1rem;
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+.loveLevel {
+  font-size: 1.5rem; /* 减少字体大小 */
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  animation: levelReveal 1s ease-out 1.5s both;
+}
+
+@keyframes levelReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 活动推荐网格 - 改进布局 */
+.activitiesSection {
+  margin-bottom: 4rem;
+}
+
+.activitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.activityCard {
+  background: linear-gradient(145deg, var(--warm-white) 0%, #FFFEF9 100%);
+  padding: 2.5rem;
+  border-radius: 25px;
+  border: 2px solid var(--cream-accent);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: cardSlideUp 0.6s ease forwards;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.activityCard:hover {
+  transform: translateY(-15px) scale(1.02);
+}
+
+.activityCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(232, 180, 160, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.activityCard:hover::before {
+  left: 100%;
+}
+
+.activityIcon {
+  margin-bottom: 1.5rem;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.activityTitle {
+  font-size: 1.5rem;
+  color: var(--cream-text);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.activityDescription {
+  color: var(--cream-light-text);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.loveBoost {
+  background: linear-gradient(135deg, var(--rose-gold) 0%, #E8A390 100%);
+  color: var(--warm-white);
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  font-size: 1rem;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.activityType {
+  color: var(--cream-light-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* 爱情贴士 - 改进设计 */
+.tipsSection {
+  margin-bottom: 4rem;
+}
+
+.tips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(145deg, var(--warm-white) 0%, #FFFEF9 100%);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+  color: var(--cream-text);
+  font-weight: 600;
+  font-size: 1rem;
+  animation: tipFadeIn 0.8s ease forwards;
+  transition: all 0.3s ease;
+}
+
+.tip:hover {
+  transform: translateX(10px);
+}
+
+@keyframes tipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tipIcon {
+  flex-shrink: 0;
+  animation: iconSpin 4s linear infinite;
+}
+
+.tip:nth-child(even) .tipIcon {
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* 操作按钮 - 优化设计 */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 4rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.backButton, .shareButton, .historyButton {
+  padding: 1.5rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  min-width: 160px;
+}
+
+.historyButton {
+  background: linear-gradient(135deg, var(--cream-accent) 0%, var(--cream-secondary) 100%);
+  color: var(--cream-text);
+  border: 2px solid var(--cream-dark);
+}
+
+.historyButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.historyButton:hover::before {
+  left: 100%;
+}
+
+.historyButton:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: linear-gradient(135deg, var(--cream-secondary) 0%, var(--cream-accent) 100%);
+  border-color: var(--rose-gold);
+}
+
+.historyButton:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.backButton::before,
+.shareButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.backButton:hover::before,
+.shareButton:hover::before {
+  left: 100%;
+}
+
+.backButton {
+  background: linear-gradient(135deg, var(--cream-accent) 0%, var(--cream-secondary) 100%);
+  color: var(--cream-text);
+}
+
+.shareButton {
+  background: linear-gradient(135deg, var(--rose-gold) 0%, var(--cream-dark) 100%);
+  color: var(--warm-white);
+}
+
+.backButton:hover, .shareButton:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.backButton:active, .shareButton:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* 移动端适配 - 优化 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .loveometer {
+    padding: 2.5rem 2rem 3rem 2rem;
+    max-width: 350px;
+    border-radius: 30px;
+  }
+
+  .circleArea {
+    width: 240px;
+    height: 240px;
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  .indexNumber {
+    font-size: 3.5rem;
+  }
+
+  .indexUnit {
+    font-size: 1.8rem;
+  }
+
+  .activitiesGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .activityCard {
+    padding: 2rem;
+  }
+
+  .tips {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .tip {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .backButton, .shareButton {
+    width: 90%;
+    max-width: 300px;
+    padding: 1.2rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .loveometer {
+    padding: 2rem 1.5rem 3rem 1.5rem;
+  }
+
+  .circleArea {
+    width: 200px;
+    height: 200px;
+    margin: 1rem 0 1rem 0;
+  }
+
+  .indexNumber {
+    font-size: 3rem;
+  }
+
+  .indexUnit {
+    font-size: 1.5rem;
+  }
+
+  .activityCard {
+    padding: 1.5rem;
+  }
+
+  .activityTitle {
+    font-size: 1.3rem;
+  }
+
+  .tip {
+    padding: 1rem;
+    font-size: 0.9rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+  }
+}
+
+/* AI分析部分样式 */
+.analysisSection {
+  margin: 3rem 0;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+.analysisContent {
+  background: var(--warm-white);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--cream-secondary);
+}
+
+.reasoningBox {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--cream-primary) 0%, var(--warm-white) 100%);
+  border-radius: 15px;
+  border-left: 4px solid var(--rose-gold);
+}
+
+.analysisSubTitle {
+  font-size: 1.4rem;
+  color: var(--cream-text);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reasoningText {
+  color: var(--cream-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.factorsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.factorsBox, .suggestionBox {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  border: 1px solid var(--cream-secondary);
+}
+
+.factorsList, .suggestionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.factorItem, .suggestionItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(244, 240, 236, 0.5);
+  color: var(--cream-text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.factorItem:last-child, .suggestionItem:last-child {
+  border-bottom: none;
+}
+
+.factorIcon, .suggestionIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* 移动端适配 - AI分析部分 */
+@media (max-width: 768px) {
+  .analysisSection {
+    margin: 2rem 0;
+  }
+
+  .analysisContent {
+    padding: 1.5rem;
+    margin: 0 0.5rem;
+  }
+
+  .factorsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .reasoningBox {
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .analysisSubTitle {
+    font-size: 1.2rem;
+  }
+
+  .reasoningText {
+    font-size: 0.95rem;
+  }
+
+  .factorItem, .suggestionItem {
+    font-size: 0.9rem;
+    padding: 0.7rem 0;
+  }
+}
+
+/* 加载页面样式 */
+.loadingSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loadingContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.loadingAnimation {
+  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.doctorImage {
+  margin-bottom: 1rem;
+  animation: doctorFloat 2s ease-in-out infinite;
+}
+
+.doctorImage img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--rose-gold);
+  box-shadow: 0 8px 25px rgba(232, 163, 144, 0.3);
+}
+
+@keyframes doctorFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.heartBeat {
+  font-size: 4rem;
+  animation: heartBeatPulse 1.5s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes heartBeatPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
+  }
+}
+
+.progressDots {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose-gold), var(--cream-accent));
+  animation: dotWave 1.4s ease-in-out infinite;
+}
+
+.dot:nth-child(1) { animation-delay: 0s; }
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+.dot:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes dotWave {
+  0%, 60%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+.loadingSteps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(145deg, var(--warm-white) 0%, #FFFEF9 100%);
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  animation: stepFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.step:nth-child(1) { animation-delay: 0.2s; }
+.step:nth-child(2) { animation-delay: 0.4s; }
+.step:nth-child(3) { animation-delay: 0.6s; }
+.step:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-3px);
+}
+
+.stepIcon {
+  font-size: 1.5rem;
+  animation: iconRotate 3s linear infinite;
+  flex-shrink: 0;
+}
+
+.stepText {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cream-text);
+  line-height: 1.4;
+}
+
+@keyframes iconRotate {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.loadingTips {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--cream-primary) 0%, var(--warm-white) 100%);
+  border-radius: 15px;
+  border-left: 4px solid var(--rose-gold);
+  color: var(--cream-text);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.loadingTips strong {
+  color: var(--cream-dark);
+}
+
+/* 移动端适配 - 加载页面 */
+@media (max-width: 768px) {
+  .loadingSection {
+    padding: 1rem;
+    min-height: 70vh;
+  }
+
+  .doctorImage img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .loadingSteps {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .step {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .stepIcon {
+    font-size: 1.3rem;
+  }
+
+  .stepText {
+    font-size: 0.9rem;
+  }
+
+  .heartBeat {
+    font-size: 3rem;
+  }
+
+  .loadingTips {
+    padding: 1.2rem;
+    font-size: 0.95rem;
+  }
+}

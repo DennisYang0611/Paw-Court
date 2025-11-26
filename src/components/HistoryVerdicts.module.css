@@ -1,0 +1,667 @@
+/* 历史裁决页面样式 */
+.container {
+  min-height: 100vh;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--cream-primary) 0%, var(--warm-white) 50%, var(--cream-secondary) 100%);
+  background-attachment: fixed;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.backButton {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
+  color: var(--cream-text);
+  border: 2px solid var(--cream-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  transform: translateY(-50%) translateY(-3px);
+  background: linear-gradient(135deg, var(--cream-secondary), var(--cream-accent));
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--cream-text);
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+  text-shadow: 2px 2px 6px rgba(139, 69, 19, 0.2);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--cream-light-text);
+  font-weight: 500;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--cream-accent);
+  border-top: 4px solid var(--rose-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.verdictsList {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.verdictItem {
+  background: var(--warm-white);
+  border: 2px solid var(--cream-accent);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.verdictItem:hover {
+  transform: translateY(-5px);
+  border-color: var(--rose-gold);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+}
+
+.verdictItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(232, 180, 160, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.verdictItem:hover::before {
+  left: 100%;
+}
+
+.verdictHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.verdictHeader h3 {
+  color: var(--cream-text);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.date {
+  color: var(--cream-light-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.verdictSummary {
+  margin-bottom: 1.5rem;
+}
+
+.parties {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cream-text);
+  margin-bottom: 0.5rem;
+}
+
+.responsibility {
+  color: var(--cream-light-text);
+  font-weight: 500;
+}
+
+.verdictActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.viewButton {
+  background: linear-gradient(135deg, var(--rose-gold), var(--cream-dark));
+  color: var(--warm-white);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.viewButton:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--cream-dark), var(--rose-gold));
+}
+
+.voteContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.voteStats {
+  display: flex;
+  gap: 1rem;
+  font-weight: 600;
+  color: var(--cream-text);
+}
+
+.voteButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.likeButton, .dislikeButton {
+  background: var(--cream-accent);
+  border: 2px solid var(--cream-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.likeButton {
+  color: #2ECC71;
+}
+
+.likeButton:hover, .likeButtonActive {
+  background: #2ECC71;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.dislikeButton {
+  color: #E74C3C;
+}
+
+.dislikeButton:hover, .dislikeButtonActive {
+  background: #E74C3C;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pageButton {
+  background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
+  color: var(--cream-text);
+  border: 2px solid var(--cream-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, var(--cream-secondary), var(--cream-accent));
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  font-weight: 600;
+  color: var(--cream-text);
+}
+
+/* 详情页样式 */
+.detailView {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.detailTitle {
+  font-size: 2rem;
+  color: var(--cream-text);
+  font-weight: 700;
+  margin: 0;
+}
+
+.verdictCard {
+  background: var(--warm-white);
+  border: 2px solid var(--cream-accent);
+  border-radius: 25px;
+  padding: 3rem;
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.1);
+}
+
+.caseHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--cream-accent);
+}
+
+.caseHeader h3 {
+  color: var(--cream-text);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.timestamp {
+  color: var(--cream-light-text);
+  font-size: 1rem;
+}
+
+.parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.party {
+  background: linear-gradient(145deg, #FFFEF9, var(--warm-white));
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+}
+
+.party h4 {
+  color: var(--cream-text);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.party p {
+  color: var(--cream-light-text);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.party p strong {
+  color: var(--cream-text);
+}
+
+.analysis, .responsibility, .verdict {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: linear-gradient(145deg, #FFFEF9, var(--warm-white));
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+}
+
+.analysis h4, .responsibility h4, .verdict h4 {
+  color: var(--cream-text);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.analysis p, .verdict p {
+  color: var(--cream-light-text);
+  line-height: 1.6;
+}
+
+.percentageDisplay {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  color: var(--cream-text);
+  font-size: 1.1rem;
+}
+
+/* 责任分配左右占比样式 */
+.responsibilitySplit {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.splitContainer {
+  display: flex;
+  height: 60px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
+  position: relative;
+}
+
+.leftPerson, .rightPerson {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  color: white;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.6s ease-in-out;
+  min-width: 60px;
+}
+
+.leftPerson {
+  background: linear-gradient(135deg, var(--rose-gold), #d4a574);
+}
+
+.rightPerson {
+  background: linear-gradient(135deg, var(--cream-dark), #8b4513);
+}
+
+.personLabel {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.personPercentage {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.splitLegend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--cream-text);
+}
+
+.legendColor {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* 列表预览的迷你占比条 */
+.miniSplitContainer {
+  display: flex;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+  box-shadow: 0 1px 3px rgba(139, 69, 19, 0.2);
+}
+
+.miniLeftPerson, .miniRightPerson {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+  font-weight: 600;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  transition: all 0.4s ease;
+  min-width: 30px;
+  gap: 0.2rem;
+}
+
+.miniLeftPerson {
+  background: linear-gradient(135deg, var(--rose-gold), #d4a574);
+}
+
+.miniRightPerson {
+  background: linear-gradient(135deg, var(--cream-dark), #8b4513);
+}
+
+.miniPersonLabel {
+  display: none;
+}
+
+.miniPersonPercentage {
+  font-size: 0.75rem;
+}
+
+/* 列表预览样式 */
+.responsibilityPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.responsibilityLabel {
+  font-size: 0.9rem;
+  color: var(--cream-text);
+  font-weight: 600;
+}
+
+/* 宽度较大时显示姓名 */
+@media (min-width: 768px) {
+  .miniPersonLabel {
+    display: inline;
+    font-size: 0.65rem;
+  }
+
+  .miniPersonPercentage {
+    font-size: 0.7rem;
+  }
+}
+
+.solutions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.solution {
+  background: linear-gradient(145deg, #FFFEF9, var(--warm-white));
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+}
+
+.solution h5 {
+  color: var(--cream-text);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.solution ul {
+  list-style: none;
+  padding: 0;
+}
+
+.solution li {
+  background: var(--cream-accent);
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 0.8rem;
+  border-radius: 12px;
+  color: var(--cream-text);
+  font-weight: 500;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.solution li::before {
+  content: '✓';
+  position: absolute;
+  left: 1rem;
+  color: var(--rose-gold);
+  font-weight: 800;
+}
+
+.voteSection {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(145deg, var(--cream-primary), var(--cream-secondary));
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+}
+
+.voteSection .voteStats {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.voteSection .voteButtons {
+  justify-content: center;
+  gap: 2rem;
+}
+
+.voteSection .voteButtons button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.votedMessage {
+  color: var(--cream-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 1rem 0 0 0;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .backButton {
+    position: static;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .verdictItem {
+    padding: 1.5rem;
+  }
+
+  .verdictActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .voteContainer {
+    justify-content: space-between;
+  }
+
+  .parties {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .solutions {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .verdictCard {
+    padding: 2rem;
+  }
+
+  .detailHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .pagination {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .pageButton {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* 新增简介样式 */
+.summary {
+  color: var(--cream-text);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  background: var(--cream-accent);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--rose-gold);
+}
+
+/* 更新当事人显示样式 */
+.parties {
+  color: var(--cream-light-text) !important;
+  font-weight: 500 !important;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem !important;
+}
+
+/* 已投票状态样式 */
+.votedStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
+  border-radius: 15px;
+  border: 1px solid var(--cream-dark);
+}
+
+.votedLabel {
+  font-size: 0.8rem;
+  color: var(--cream-text);
+  font-weight: 600;
+}

@@ -1,0 +1,449 @@
+/* 爱情指数加载页面样式 - 仿照JudgeLoading设计 */
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--cream-primary) 0%, var(--warm-white) 50%, var(--cream-secondary) 100%);
+  background-attachment: fixed;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* 点击动画效果 */
+.clickEffect {
+  position: absolute;
+  pointer-events: none;
+  font-size: 2rem;
+  animation: clickAnimation 1s ease-out forwards;
+  z-index: 1000;
+}
+
+@keyframes clickAnimation {
+  0% {
+    opacity: 1;
+    transform: scale(0.5) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5) rotate(360deg);
+  }
+}
+
+.loadingContent {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* 米粒医生形象 */
+.doctorImageContainer {
+  margin-bottom: 2rem;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.doctorImage {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--rose-gold);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 15px 30px rgba(232, 163, 144, 0.3);
+  }
+  to {
+    box-shadow: 0 20px 40px rgba(232, 163, 144, 0.5), 0 0 25px rgba(255, 105, 180, 0.4);
+  }
+}
+
+/* 听诊器/爱心装饰 */
+.stethoscope {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+.heartIcon {
+  display: inline-block;
+  font-size: inherit;
+  line-height: 1;
+}
+
+@keyframes heartbeat {
+  0%, 80%, 100% {
+    transform: scale(1) rotate(-10deg);
+  }
+  10%, 30% {
+    transform: scale(1.2) rotate(10deg);
+  }
+}
+
+/* 加载文字 */
+.loadingText {
+  margin-bottom: 2rem;
+}
+
+.loadingText h2 {
+  font-size: 1.6rem;
+  color: var(--cream-text);
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.loadingDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  font-size: 1.2rem;
+  color: var(--cream-light-text);
+  flex-wrap: wrap;
+}
+
+.loadingDots span {
+  animation: bounce 1.8s ease-in-out infinite;
+}
+
+.loadingDots span:nth-child(1) { animation-delay: 0s; }
+.loadingDots span:nth-child(2) { animation-delay: 0.15s; }
+.loadingDots span:nth-child(3) { animation-delay: 0.3s; }
+.loadingDots span:nth-child(4) { animation-delay: 0.45s; }
+.loadingDots span:nth-child(5) { animation-delay: 0.6s; }
+.loadingDots span:nth-child(6) { animation-delay: 0.75s; }
+.loadingDots span:nth-child(7) { animation-delay: 0.9s; }
+.loadingDots span:nth-child(8) { animation-delay: 1.05s; }
+.loadingDots span:nth-child(9) { animation-delay: 1.2s; }
+.loadingDots span:nth-child(10) { animation-delay: 1.35s; }
+.loadingDots span:nth-child(11) { animation-delay: 1.5s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-20px); }
+}
+
+/* 进度条 */
+.progressBar {
+  width: 100%;
+  height: 10px;
+  background: var(--cream-accent);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.progressBar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose-gold), #FF69B4);
+  width: 0%;
+  border-radius: 5px;
+  animation: progress 12s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  15% { width: 15%; }
+  30% { width: 30%; }
+  45% { width: 45%; }
+  60% { width: 60%; }
+  75% { width: 75%; }
+  90% { width: 90%; }
+  100% { width: 100%; }
+}
+
+/* 点击提示 */
+.clickHint {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.clickHint span {
+  font-size: 1.1rem;
+  color: var(--cream-text);
+  font-weight: 600;
+  opacity: 0.8;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+.clickAnimation {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  animation: pointDown 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes pointDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+/* 加载提示 */
+.loadingTips {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  background: var(--warm-white);
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+  color: var(--cream-text);
+  font-weight: 600;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  transition: transform 0.3s ease;
+}
+
+.tip:hover {
+  transform: translateY(-2px);
+}
+
+.tip:nth-child(1) { animation-delay: 1s; }
+.tip:nth-child(2) { animation-delay: 2s; }
+.tip:nth-child(3) { animation-delay: 3s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tipIcon {
+  font-size: 1.5rem;
+  animation: spin 3s linear infinite;
+  flex-shrink: 0;
+}
+
+.tip:nth-child(2) .tipIcon {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.tip:nth-child(3) .tipIcon {
+  animation: flash 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes flash {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.6; }
+}
+
+/* 平板端适配 */
+@media (max-width: 1024px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .doctorImage {
+    width: 220px;
+    height: 220px;
+  }
+
+  .loadingText h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    min-height: 100svh;
+  }
+
+  .doctorImage {
+    width: 200px;
+    height: 200px;
+  }
+
+  .stethoscope {
+    right: 15px;
+    top: 15px;
+    font-size: 1.8rem;
+  }
+
+  .loadingText {
+    margin-bottom: 2rem;
+  }
+
+  .loadingText h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .loadingDots {
+    font-size: 1rem;
+    gap: 0.25rem;
+  }
+
+  .progressBar {
+    height: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .clickHint {
+    margin: 1.5rem 0;
+  }
+
+  .clickHint span {
+    font-size: 1rem;
+  }
+
+  .clickAnimation {
+    font-size: 1.3rem;
+  }
+
+  .loadingTips {
+    gap: 0.8rem;
+  }
+
+  .tip {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    border-radius: 15px;
+  }
+
+  .tipIcon {
+    font-size: 1.3rem;
+  }
+}
+
+/* 小屏手机适配 */
+@media (max-width: 480px) {
+  .container {
+    padding: 0.8rem;
+  }
+
+  .doctorImage {
+    width: 160px;
+    height: 160px;
+  }
+
+  .stethoscope {
+    right: 10px;
+    top: 10px;
+    font-size: 1.5rem;
+  }
+
+  .loadingText h2 {
+    font-size: 1.4rem;
+  }
+
+  .loadingDots {
+    font-size: 0.9rem;
+    gap: 0.2rem;
+  }
+
+  .progressBar {
+    height: 6px;
+  }
+
+  .clickHint {
+    margin: 1rem 0;
+  }
+
+  .clickHint span {
+    font-size: 0.9rem;
+  }
+
+  .clickAnimation {
+    font-size: 1.2rem;
+  }
+
+  .tip {
+    font-size: 0.8rem;
+    padding: 0.6rem;
+    gap: 0.6rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tipIcon {
+    font-size: 1.2rem;
+  }
+}
+
+/* 超小屏设备 */
+@media (max-width: 320px) {
+  .doctorImage {
+    width: 140px;
+    height: 140px;
+  }
+
+  .loadingText h2 {
+    font-size: 1.2rem;
+  }
+
+  .loadingDots span {
+    font-size: 0.8rem;
+  }
+}
