@@ -1,0 +1,433 @@
+/* 陪审团模式样式 */
+.container {
+  min-height: 100vh;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--cream-primary) 0%, var(--warm-white) 50%, var(--cream-secondary) 100%);
+  background-attachment: fixed;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.backButton {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
+  color: var(--cream-text);
+  border: 2px solid var(--cream-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  transform: translateY(-50%) translateY(-3px);
+  background: linear-gradient(135deg, var(--cream-secondary), var(--cream-accent));
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--cream-text);
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+  text-shadow: 2px 2px 6px rgba(139, 69, 19, 0.2);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--cream-light-text);
+  font-weight: 500;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1.5rem;
+}
+
+.loadingDog {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--cream-accent);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.25);
+  animation: spin 2s linear infinite;
+}
+
+.spinner {
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.errorContainer {
+  text-align: center;
+  padding: 3rem;
+  background: var(--warm-white);
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.errorIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.retryButton {
+  background: linear-gradient(135deg, var(--rose-gold), var(--cream-dark));
+  color: var(--warm-white);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.retryButton:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--cream-dark), var(--rose-gold));
+}
+
+/* 没有更多案例 */
+.noMoreCases {
+  text-align: center;
+  padding: 3rem;
+  background: var(--warm-white);
+  border-radius: 25px;
+  border: 2px solid var(--cream-accent);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.completionIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.refreshButton, .backButtonSecondary {
+  background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
+  color: var(--cream-text);
+  border: 2px solid var(--cream-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.refreshButton:hover, .backButtonSecondary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--cream-secondary), var(--cream-accent));
+}
+
+/* 案例容器 */
+.caseContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--warm-white);
+  border: 2px solid var(--cream-accent);
+  border-radius: 25px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.1);
+}
+
+.caseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--cream-accent);
+}
+
+.caseHeader h2 {
+  color: var(--cream-text);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.caseDate {
+  color: var(--cream-light-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.caseTitle {
+  margin-bottom: 1.5rem;
+}
+
+.caseTitle h3 {
+  color: var(--cream-text);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.caseSummary {
+  background: var(--cream-accent);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--rose-gold);
+}
+
+.caseSummary h4 {
+  color: var(--cream-text);
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.caseSummary p {
+  color: var(--cream-text);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* 当事人信息 */
+.parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.party {
+  background: linear-gradient(145deg, #FFFEF9, var(--warm-white));
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+}
+
+.party h4 {
+  color: var(--cream-text);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.storySection, .complaintSection {
+  margin-bottom: 1rem;
+}
+
+.storySection h5, .complaintSection h5 {
+  color: var(--cream-text);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.storySection p, .complaintSection p {
+  color: var(--cream-light-text);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* AI判决部分 */
+.aiJudgment {
+  background: linear-gradient(145deg, var(--cream-primary), var(--cream-secondary));
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+  margin-bottom: 2rem;
+}
+
+.aiJudgment h4 {
+  color: var(--cream-text);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.analysis, .responsibility, .verdict {
+  margin-bottom: 1.5rem;
+}
+
+.analysis h5, .responsibility h5, .verdict h5 {
+  color: var(--cream-text);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.analysis p, .verdict p {
+  color: var(--cream-light-text);
+  line-height: 1.6;
+}
+
+/* 责任分配图表 */
+.responsibilityChart {
+  margin-top: 1rem;
+}
+
+.chartContainer {
+  display: flex;
+  height: 50px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
+}
+
+.person1Bar, .person2Bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  transition: all 0.6s ease-in-out;
+  min-width: 80px;
+}
+
+.person1Bar {
+  background: linear-gradient(135deg, var(--rose-gold), #d4a574);
+}
+
+.person2Bar {
+  background: linear-gradient(135deg, var(--cream-dark), #8b4513);
+}
+
+/* 陪审团部分 */
+.jurySection {
+  background: linear-gradient(145deg, #FFFEF9, var(--warm-white));
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid var(--cream-accent);
+  margin-bottom: 1.5rem;
+}
+
+.jurySection h4 {
+  color: var(--cream-text);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+/* 下一个案例 */
+.nextCaseSection {
+  text-align: center;
+  background: var(--cream-accent);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid var(--rose-gold);
+}
+
+.voteSuccess {
+  margin-bottom: 1.5rem;
+}
+
+.successIcon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.voteSuccess p {
+  color: var(--cream-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.nextCaseButton {
+  background: linear-gradient(135deg, var(--rose-gold), var(--cream-dark));
+  color: var(--warm-white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nextCaseButton:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--cream-dark), var(--rose-gold));
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+  }
+
+  .backButton {
+    position: static;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .caseContainer {
+    padding: 1.5rem;
+  }
+
+  .parties {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .caseHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .refreshButton, .backButtonSecondary {
+    width: 100%;
+    max-width: 250px;
+  }
+}

@@ -1,3 +1,122 @@
+/* 搜索容器样式 */
+.searchContainer {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  padding: 0 1rem;
+}
+
+.searchForm {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+
+.searchInputContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  padding-right: 3rem;
+  border: 2px solid var(--cream-accent);
+  border-radius: 20px;
+  background: var(--warm-white);
+  color: var(--cream-text);
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: var(--rose-gold);
+  box-shadow: 0 0 0 3px rgba(232, 180, 160, 0.2);
+}
+
+.searchInput::placeholder {
+  color: var(--cream-light-text);
+  font-weight: 400;
+}
+
+.clearButton {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--cream-light-text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
+}
+
+.clearButton:hover {
+  background: var(--cream-accent);
+  color: var(--cream-text);
+}
+
+.searchButton {
+  background: linear-gradient(135deg, var(--rose-gold), var(--cream-dark));
+  color: var(--warm-white);
+  border: 2px solid var(--cream-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.searchButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--cream-dark), var(--rose-gold));
+}
+
+.searchButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.searchStatus {
+  text-align: center;
+  padding: 0.5rem;
+  background: var(--cream-accent);
+  border-radius: 12px;
+  color: var(--cream-text);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* 移动端搜索样式优化 */
+@media (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .searchInput {
+    font-size: 16px; /* 防止iOS缩放 */
+  }
+
+  .searchButton {
+    align-self: stretch;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
+
 /* 历史裁决页面样式 */
 .container {
   min-height: 100vh;
@@ -52,16 +171,21 @@
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  gap: 1rem;
+  gap: 1.5rem;
+}
+
+.loadingDog {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--cream-accent);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.25);
+  animation: spin 2s linear infinite;
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid var(--cream-accent);
-  border-top: 4px solid var(--rose-gold);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+  display: none; /* 隐藏原来的spinner，只显示小狗 */
 }
 
 @keyframes spin {
@@ -220,8 +344,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: 3rem;
+  flex-wrap: wrap;
 }
 
 .pageButton {
@@ -233,6 +358,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .pageButton:hover:not(:disabled) {
@@ -248,6 +374,58 @@
 .pageInfo {
   font-weight: 600;
   color: var(--cream-text);
+  white-space: nowrap;
+}
+
+.jumpToPage {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--warm-white);
+  border: 2px solid var(--cream-accent);
+  border-radius: 15px;
+  padding: 0.3rem;
+}
+
+.jumpInput {
+  width: 60px;
+  padding: 0.5rem;
+  border: 1px solid var(--cream-secondary);
+  border-radius: 8px;
+  text-align: center;
+  background: var(--warm-white);
+  color: var(--cream-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.jumpInput:focus {
+  outline: none;
+  border-color: var(--rose-gold);
+}
+
+.jumpButton {
+  background: linear-gradient(135deg, var(--rose-gold), var(--cream-dark));
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.jumpButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--cream-dark), var(--rose-gold));
+  transform: translateY(-1px);
+}
+
+.jumpButton:disabled {
+  background: var(--cream-accent);
+  color: var(--cream-light-text);
+  cursor: not-allowed;
 }
 
 /* 详情页样式 */
@@ -476,6 +654,86 @@
   font-weight: 600;
 }
 
+/* 陪审团预览样式 */
+.juryPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
+  padding: 0.6rem;
+  background: linear-gradient(135deg, var(--cream-primary), #FFFEF9);
+  border-radius: 8px;
+  border: 1px solid var(--cream-secondary);
+}
+
+.juryLabel {
+  font-size: 0.75rem;
+  color: var(--cream-light-text);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.juryVoteLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.juryPersonLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--cream-text);
+}
+
+.juryPersonLabel:first-child {
+  color: var(--rose-gold);
+}
+
+.juryPersonLabel:last-child {
+  color: var(--cream-dark);
+}
+
+.miniJuryContainer {
+  display: flex;
+  height: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--cream-accent);
+  box-shadow: inset 0 1px 3px rgba(139, 69, 19, 0.2);
+}
+
+.miniJuryPerson1, .miniJuryPerson2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: white;
+  font-weight: 600;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+  min-width: 0;
+}
+
+.miniJuryPerson1 {
+  background: linear-gradient(135deg, var(--rose-gold), #E8B4A0);
+}
+
+.miniJuryPerson2 {
+  background: linear-gradient(135deg, var(--cream-dark), #A68B5B);
+}
+
+.miniJuryPercentage {
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.juryCount {
+  font-size: 0.65rem;
+  color: var(--cream-light-text);
+  text-align: right;
+  margin-top: 0.2rem;
+}
+
 /* 宽度较大时显示姓名 */
 @media (min-width: 768px) {
   .miniPersonLabel {
@@ -583,6 +841,19 @@
     font-size: 2rem;
   }
 
+  .searchContainer {
+    padding: 0;
+  }
+
+  .searchForm {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .searchButton {
+    width: 100%;
+  }
+
   .verdictItem {
     padding: 1.5rem;
   }
@@ -620,6 +891,17 @@
   .pagination {
     gap: 1rem;
     flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .jumpToPage {
+    order: 1;
+    margin: 0.5rem 0;
+  }
+
+  .pageButton {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
   }
 
   .pageButton {
@@ -654,6 +936,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   padding: 0.4rem 0.8rem;
   background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
   border-radius: 15px;
@@ -664,4 +947,57 @@
   font-size: 0.8rem;
   color: var(--cream-text);
   font-weight: 600;
+}
+
+.withdrawButton {
+  background: var(--rose-gold);
+  color: white;
+  border: 1px solid var(--cream-dark);
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.withdrawButton:hover {
+  background: var(--cream-dark);
+  transform: translateY(-1px);
+}
+
+/* 详情页投票状态样式 */
+.votedStatusDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--cream-primary), var(--cream-secondary));
+  border-radius: 15px;
+  border: 2px solid var(--cream-accent);
+}
+
+.votedMessage {
+  font-size: 1.1rem;
+  color: var(--cream-text);
+  font-weight: 600;
+  text-align: center;
+}
+
+.withdrawButtonDetail {
+  background: linear-gradient(135deg, var(--rose-gold), var(--cream-dark));
+  color: white;
+  border: 2px solid var(--cream-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.withdrawButtonDetail:hover {
+  background: linear-gradient(135deg, var(--cream-dark), var(--rose-gold));
+  transform: translateY(-2px);
 }

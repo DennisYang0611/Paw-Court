@@ -1,0 +1,758 @@
+.juryPanel {
+  background: var(--warm-white);
+  border: 2px solid var(--cream-secondary);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--soft-shadow);
+  padding: 24px;
+  margin: 20px 0;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.floatingToggleTop {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerText {
+  text-align: center;
+}
+
+.headerText h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cream-text);
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--cream-light-text);
+  text-align: center;
+}
+
+/* 悬浮投票开关样式 */
+.floatingToggle {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggleInput {
+  display: none;
+}
+
+.toggleSlider {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--cream-accent);
+  border: 2px solid var(--cream-dark);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.toggleSlider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: var(--cream-dark);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.toggleInput:checked + .toggleSlider {
+  background: var(--rose-gold);
+  border-color: var(--rose-gold);
+}
+
+.toggleInput:checked + .toggleSlider::before {
+  background: white;
+  transform: translateX(20px);
+}
+
+.toggleSlider:hover {
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+}
+
+.toggleText {
+  font-size: 13px;
+  color: var(--cream-text);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.votingArea {
+  margin-bottom: 32px;
+}
+
+.voteStats {
+  margin-bottom: 20px;
+}
+
+.totalVotes {
+  text-align: center;
+  font-size: 14px;
+  color: var(--cream-light-text);
+  margin-bottom: 16px;
+}
+
+.progressContainer {
+  background: var(--cream-primary);
+  border: 1px solid var(--cream-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.progressBar {
+  height: 40px;
+  display: flex;
+  background: var(--cream-accent);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  transition: width 0.3s ease;
+  min-width: 0;
+}
+
+.progressFill.person1 {
+  background: linear-gradient(135deg, var(--rose-gold), #D4A574);
+}
+
+.progressFill.person2 {
+  background: linear-gradient(135deg, var(--cream-dark), #A68B5B);
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.labelLeft,
+.labelRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.labelLeft {
+  align-items: flex-start;
+}
+
+.labelRight {
+  align-items: flex-end;
+}
+
+.personName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cream-text);
+}
+
+.voteCount {
+  font-size: 12px;
+  color: var(--cream-light-text);
+}
+
+.voteButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.voteButton {
+  flex: 1;
+  max-width: 200px;
+  padding: 12px 24px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.voteButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.votePerson1 {
+  background: linear-gradient(135deg, var(--rose-gold), #D4A574);
+  color: white;
+  border-color: var(--rose-gold);
+}
+
+.votePerson1:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--hover-shadow);
+  background: var(--rose-gold);
+}
+
+.votePerson2 {
+  background: linear-gradient(135deg, var(--cream-dark), #A68B5B);
+  color: white;
+  border-color: var(--cream-dark);
+}
+
+.votePerson2:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--hover-shadow);
+  background: var(--cream-dark);
+}
+
+.votedMessage {
+  text-align: center;
+  padding: 12px;
+  background: var(--cream-primary);
+  border: 1px solid var(--cream-secondary);
+  border-radius: 8px;
+  color: var(--cream-text);
+  font-weight: 500;
+}
+
+.error {
+  background: #FFF2F2;
+  border: 1px solid #F8C8C8;
+  border-radius: 8px;
+  padding: 12px;
+  color: #B91C1C;
+  font-size: 14px;
+  text-align: center;
+  margin: 12px 0;
+}
+
+.commentsSection {
+  border-top: 1px solid var(--cream-secondary);
+  padding-top: 24px;
+}
+
+.commentsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.commentsHeader h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cream-text);
+}
+
+.addCommentBtn {
+  background: var(--cream-dark);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.addCommentBtn:hover {
+  background: #A68B5B;
+  box-shadow: 0 2px 6px var(--soft-shadow);
+}
+
+.commentForm {
+  background: var(--cream-primary);
+  border: 1px solid var(--cream-secondary);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.commentInput {
+  width: 100%;
+  border: 1px solid var(--cream-accent);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: 12px;
+  background: var(--warm-white);
+  color: var(--cream-text);
+}
+
+.commentInput:focus {
+  outline: none;
+  border-color: var(--cream-dark);
+  box-shadow: 0 0 0 2px rgba(200, 168, 130, 0.2);
+}
+
+.commentFormFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.supportSideSelector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--cream-light-text);
+}
+
+.supportSideSelector select {
+  border: 1px solid var(--cream-accent);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  background: var(--warm-white);
+  color: var(--cream-text);
+}
+
+.commentFormActions {
+  display: flex;
+  gap: 8px;
+}
+
+.cancelBtn,
+.submitBtn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelBtn {
+  background: var(--cream-accent);
+  color: var(--cream-text);
+}
+
+.cancelBtn:hover {
+  background: #D4C2A8;
+}
+
+.submitBtn {
+  background: var(--rose-gold);
+  color: white;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #D4A574;
+  box-shadow: 0 2px 6px var(--soft-shadow);
+}
+
+.submitBtn:disabled {
+  background: var(--cream-accent);
+  cursor: not-allowed;
+  color: var(--cream-light-text);
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.noComments {
+  text-align: center;
+  color: var(--cream-light-text);
+  font-style: italic;
+  padding: 20px;
+}
+
+.commentItem {
+  background: var(--cream-primary);
+  border: 1px solid var(--cream-secondary);
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+
+.commentItem:hover {
+  background: var(--cream-secondary);
+  box-shadow: 0 2px 6px var(--soft-shadow);
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.commentAuthor {
+  color: var(--cream-light-text);
+  font-weight: 500;
+}
+
+.commentSide {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.commentSide.sideperson1 {
+  background: rgba(232, 180, 160, 0.2);
+  color: var(--rose-gold);
+  border: 1px solid rgba(232, 180, 160, 0.3);
+}
+
+.commentSide.sideperson2 {
+  background: rgba(200, 168, 130, 0.2);
+  color: var(--cream-dark);
+  border: 1px solid rgba(200, 168, 130, 0.3);
+}
+
+.commentSide.sideneutral {
+  background: rgba(232, 213, 196, 0.3);
+  color: var(--cream-light-text);
+  border: 1px solid var(--cream-accent);
+}
+
+.commentTime {
+  color: var(--cream-light-text);
+  margin-left: auto;
+}
+
+.commentContent {
+  color: var(--cream-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* 悬浮投票面板样式 - 固定在底部 */
+.floatingVotePanel {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 254, 249, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 3px solid var(--rose-gold);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(139, 69, 19, 0.4);
+  animation: slideInFromBottom 0.4s ease-out;
+  max-width: 600px;
+  width: calc(100vw - 40px);
+  min-width: 320px;
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.floatingContent {
+  padding: 1.2rem 1.5rem;
+}
+
+.floatingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--cream-accent);
+}
+
+.floatingHeader h4 {
+  color: var(--cream-text);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+  text-shadow: 1px 1px 3px rgba(139, 69, 19, 0.1);
+}
+
+.closeFloating {
+  background: none;
+  border: none;
+  color: var(--cream-light-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.closeFloating:hover {
+  background: var(--cream-accent);
+  color: var(--cream-text);
+  transform: rotate(90deg);
+}
+
+.floatingStats {
+  margin-bottom: 1rem;
+}
+
+.miniProgressBar {
+  display: flex;
+  height: 28px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--cream-accent);
+  margin-bottom: 0.8rem;
+  box-shadow: inset 0 2px 4px rgba(139, 69, 19, 0.1);
+}
+
+.miniProgressFill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  transition: all 0.4s ease;
+  min-width: 0;
+}
+
+.miniProgressFill.person1 {
+  background: linear-gradient(135deg, var(--rose-gold), #d4a574);
+}
+
+.miniProgressFill.person2 {
+  background: linear-gradient(135deg, var(--cream-dark), #8b4513);
+}
+
+.miniLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--cream-text);
+  font-weight: 500;
+}
+
+.floatingVoteButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.floatingVoteBtn {
+  background: linear-gradient(135deg, var(--cream-accent), var(--cream-secondary));
+  color: var(--cream-text);
+  border: 2px solid var(--cream-dark);
+  padding: 0.9rem 1.2rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.floatingVoteBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.floatingVoteBtn:hover::before {
+  left: 100%;
+}
+
+.floatingVoteBtn:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: linear-gradient(135deg, var(--cream-secondary), var(--cream-accent));
+  border-color: var(--rose-gold);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
+}
+
+.floatingVoteBtn:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.floatingVoteBtn.votePerson1:hover {
+  background: linear-gradient(135deg, var(--rose-gold), #d4a574);
+  color: white;
+}
+
+.floatingVoteBtn.votePerson2:hover {
+  background: linear-gradient(135deg, var(--cream-dark), #8b4513);
+  color: white;
+}
+
+.floatingVoteBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.floatingVoteBtn:disabled:hover {
+  transform: none;
+}
+
+/* 移动端悬浮面板适配 */
+@media (max-width: 768px) {
+  .floatingVotePanel {
+    bottom: 10px;
+    max-width: none;
+    width: calc(100vw - 20px);
+    min-width: auto;
+  }
+
+  .floatingContent {
+    padding: 1rem;
+  }
+
+  .floatingHeader h4 {
+    font-size: 1rem;
+  }
+
+  .floatingVoteButtons {
+    gap: 0.8rem;
+  }
+
+  .floatingVoteBtn {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .miniProgressBar {
+    height: 24px;
+  }
+
+  .miniProgressFill {
+    font-size: 0.75rem;
+  }
+
+  .miniLabels {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floatingVotePanel {
+    bottom: 5px;
+    width: calc(100vw - 10px);
+  }
+
+  .floatingContent {
+    padding: 0.8rem;
+  }
+
+  .floatingVoteButtons {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .floatingVoteBtn {
+    padding: 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .miniProgressBar {
+    height: 22px;
+  }
+
+  .closeFloating {
+    width: 24px;
+    height: 24px;
+    font-size: 1.3rem;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .juryPanel {
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .floatingToggle {
+    order: -1;
+    align-self: flex-end;
+  }
+
+  .voteButtons {
+    flex-direction: column;
+  }
+
+  .voteButton {
+    max-width: none;
+  }
+
+  .commentFormFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .supportSideSelector {
+    justify-content: center;
+  }
+
+  .commentFormActions {
+    justify-content: center;
+  }
+
+  .progressLabels {
+    font-size: 12px;
+  }
+}

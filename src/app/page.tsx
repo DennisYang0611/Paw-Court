@@ -5,10 +5,17 @@ import JudgeLoading from '../components/JudgeLoading';
 import JudgeResult from '../components/JudgeResult';
 import LoveIndex from '../components/LoveIndex';
 import HistoryVerdicts from '../components/HistoryVerdicts';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+import JuryMode from '../components/JuryMode';
+import CaseSubmission from '../components/CaseSubmission';
+import { useTranslation } from '../contexts/I18nContext';
 import { JudgeAnalysis } from '../services/aiService';
 
 export default function Home() {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
+  const [mode, setMode] = useState<'home' | 'jury' | 'submit' | 'history'>('home');
+  const [showChangelog, setShowChangelog] = useState(false);
   const [formData, setFormData] = useState({
     person1: {
       name: '',
@@ -150,6 +157,40 @@ export default function Home() {
            formData.person2.name && formData.person2.story && formData.person2.complaint;
   };
 
+  const resetToHome = () => {
+    setMode('home');
+    setCurrentStep(1);
+    setFormData({
+      person1: { name: '', story: '', complaint: '' },
+      person2: { name: '', story: '', complaint: '' }
+    });
+    setJudgeResult(null);
+  };
+
+  // 处理不同模式
+  if (mode === 'jury') {
+    return <JuryMode onBack={resetToHome} />;
+  }
+
+  if (mode === 'history') {
+    return <HistoryVerdicts onBack={resetToHome} />;
+  }
+
+  if (mode === 'submit') {
+    return (
+      <CaseSubmission
+        onBack={resetToHome}
+        onSubmitComplete={(data, result) => {
+          setFormData(data);
+          setJudgeResult(result);
+          setCurrentStep(3);
+          setMode('home');
+        }}
+      />
+    );
+  }
+
+  // 原有的案件处理流程
   if (currentStep === 2) {
     return <JudgeLoading />;
   }
@@ -170,135 +211,114 @@ export default function Home() {
   if (currentStep === 4) {
     return (
       <LoveIndex
-        onBack={() => setCurrentStep(1)}
-        onHistory={() => setCurrentStep(5)}
+        onBack={resetToHome}
+        onHistory={() => setMode('history')}
         formData={formData}
         judgeResult={judgeResult}
       />
     );
   }
 
-  if (currentStep === 5) {
-    return <HistoryVerdicts onBack={() => setCurrentStep(1)} />;
-  }
-
+  // 新的首页 - 选择模式
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.headerTop}>
+          <LanguageSwitcher />
           <button
             className={styles.historyQuickButton}
-            onClick={() => setCurrentStep(5)}
-            title="查看历史裁决"
+            onClick={() => setMode('history')}
+            title="历史案例"
           >
             <span className={styles.historyButtonIcon}>📚</span>
-            <span className={styles.historyButtonText}>历史</span>
+            <span className={styles.historyButtonText}>历史案例</span>
           </button>
         </div>
         <h1 className={styles.title}>
-          汪汪法庭
+          {t.homepage.title}
         </h1>
-        <p className={styles.subtitle}>让公正的小法官米粒为你们裁决吧！</p>
+        <p className={styles.subtitle}>{t.homepage.subtitle}</p>
+
+        {/* 新版本发布气泡 */}
+        <div className={styles.versionBubble} onClick={() => setShowChangelog(true)}>
+          <span className={styles.bubbleIcon}>🌟</span>
+          <span className={styles.bubbleText}>新版本发布，快来当正义小法官吧！</span>
+        </div>
       </div>
+
+      {/* 更新日志弹窗 */}
+      {showChangelog && (
+        <div className={styles.changelogOverlay} onClick={() => setShowChangelog(false)}>
+          <div className={styles.changelogModal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.changelogHeader}>
+              <h3>🌟 汪汪法庭更新日志</h3>
+              <button
+                className={styles.closeButton}
+                onClick={() => setShowChangelog(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className={styles.changelogContent}>
+              <div className={styles.changelogSection}>
+                <h4>🌟 核心功能新增</h4>
+                <ul>
+                  <li><strong>新增陪审团投票模式</strong> - 支持快速投票直达下一案例，吃瓜决策更高效，互动体验升级</li>
+                  <li><strong>新增悬浮窗投票功能</strong> - 陪审团模式专属优化，可边浏览案件详情边完成判决，操作流程更流畅</li>
+                  <li><strong>新增案件提交确认页</strong> - 提交前二次校验关键信息，有效降低填写错误率，提升数据准确性</li>
+                  <li><strong>新增历史记录跳转页</strong> - 支持快速定位目标案件，历史内容查阅效率大幅提升</li>
+                </ul>
+              </div>
+
+              <div className={styles.changelogSection}>
+                <h4>🎨 交互体验优化</h4>
+                <ul>
+                  <li><strong>首页入口重构</strong> - 拆分「案件评审」与「案件提交」双入口，功能路径更清晰，用户可快速直达需求场景</li>
+                  <li><strong>案件描述输入逻辑优化</strong> - 支持分步骤填写双方信息（先输入一方诉求，再补充另一方情况），交互更符合用户操作习惯</li>
+                  <li><strong>历史记录搜索升级</strong> - 新增「提交人昵称」「案件名称」双维度搜索，精准匹配目标内容，查找更便捷</li>
+                </ul>
+              </div>
+
+              <div className={styles.changelogSection}>
+                <h4>📌 温馨提示</h4>
+                <p>为避免数据冗余及人工核对成本，建议大家使用匿名方式提交案件，感谢您的理解与配合～</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className={styles.judgeIcon}>
-        <img src="/judge-dog.png" alt="法官米粒" className={styles.dogImage} />
-        <p className={styles.judgeName}>法官米粒</p>
+        <img src="/judge-dog.png" alt={t.homepage.judgeName} className={styles.dogImage} />
+        <p className={styles.judgeName}>{t.homepage.judgeName}</p>
       </div>
 
-      <div className={styles.formContainer}>
-        <div className={styles.personForm}>
-          <div className={styles.formHeader}>
-            <h3>
-              当事人甲
-            </h3>
-          </div>
-          <div className={styles.inputGroup}>
-            <label>姓名/昵称</label>
-            <input
-              type="text"
-              placeholder="请输入姓名或昵称"
-              value={formData.person1.name}
-              onChange={(e) => handleInputChange('person1', 'name', e.target.value)}
-              className={styles.input}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label>事情经过</label>
-            <textarea
-              placeholder="详细描述一下发生了什么事情..."
-              value={formData.person1.story}
-              onChange={(e) => handleInputChange('person1', 'story', e.target.value)}
-              className={styles.textarea}
-              rows={4}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label>委屈的点</label>
-            <textarea
-              placeholder="说说你觉得委屈的地方..."
-              value={formData.person1.complaint}
-              onChange={(e) => handleInputChange('person1', 'complaint', e.target.value)}
-              className={styles.textarea}
-              rows={3}
-            />
+      <div className={styles.modeSelection}>
+        <div className={styles.modeCard} onClick={() => setMode('jury')}>
+          <div className={styles.modeIcon}>🗳️</div>
+          <h3 className={styles.modeTitle}>{t.homepage.modeJuryTitle}</h3>
+          <p className={styles.modeDescription}>
+            {t.homepage.modeJuryDesc}
+          </p>
+          <div className={styles.modeFeatures}>
+            <span className={styles.featureTag}>{t.homepage.featureSmartAssign}</span>
+            <span className={styles.featureTag}>{t.homepage.featureVoteStance}</span>
+            <span className={styles.featureTag}>{t.homepage.featureGroupDiscussion}</span>
           </div>
         </div>
 
-        <div className={styles.personForm}>
-          <div className={styles.formHeader}>
-            <h3>
-              当事人乙
-            </h3>
-          </div>
-          <div className={styles.inputGroup}>
-            <label>姓名/昵称</label>
-            <input
-              type="text"
-              placeholder="请输入姓名或昵称"
-              value={formData.person2.name}
-              onChange={(e) => handleInputChange('person2', 'name', e.target.value)}
-              className={styles.input}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label>事情经过</label>
-            <textarea
-              placeholder="详细描述一下发生了什么事情..."
-              value={formData.person2.story}
-              onChange={(e) => handleInputChange('person2', 'story', e.target.value)}
-              className={styles.textarea}
-              rows={4}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label>委屈的点</label>
-            <textarea
-              placeholder="说说你觉得委屈的地方..."
-              value={formData.person2.complaint}
-              onChange={(e) => handleInputChange('person2', 'complaint', e.target.value)}
-              className={styles.textarea}
-              rows={3}
-            />
+        <div className={styles.modeCard} onClick={() => setMode('submit')}>
+          <div className={styles.modeIcon}>📝</div>
+          <h3 className={styles.modeTitle}>{t.homepage.modeSubmitTitle}</h3>
+          <p className={styles.modeDescription}>
+            {t.homepage.modeSubmitDesc}
+          </p>
+          <div className={styles.modeFeatures}>
+            <span className={styles.featureTag}>{t.homepage.featureSimpleForm}</span>
+            <span className={styles.featureTag}>{t.homepage.featureAiAnalysis}</span>
+            <span className={styles.featureTag}>{t.homepage.featurePracticalSolution}</span>
           </div>
         </div>
-      </div>
-
-      <div className={styles.actions}>
-        <button
-          className={`${styles.submitButton} ${!isFormValid() ? styles.disabled : ''}`}
-          onClick={handleSubmit}
-          disabled={!isFormValid()}
-        >
-          提交给法官审理
-        </button>
-
-        <button
-          className={styles.historyButton}
-          onClick={() => setCurrentStep(5)}
-        >
-          📚 查看历史裁决
-        </button>
       </div>
     </div>
   );
